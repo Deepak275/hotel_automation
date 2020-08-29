@@ -6,48 +6,46 @@ module HotelAutomation
 
       it "should return the current status of appliances of corridor" do
         appliances = HotelAutomation::Corridor.new
-        p appliances.air_conditioners
-        p appliances.lights
-        expected_output = "  Light 1: OFF\n  Light 2: OFF\n   AC 1: OFF\n   AC 2: OFF\n"
+        expected_output = "  Light 1: OFF\n   AC 1: OFF\n"
 
         expect(appliances.current_status).to eq(expected_output)
       end
     end
     
-    # describe "#turn_off" do
+    describe "#move" do
+      it "should set the move to true" do
+        appliances = HotelAutomation::Corridor.new
+        appliances.move
 
-    #   it "should set the status to off" do
-    #     appliances = HotelAutomation::Appliances.new(STATUS_ON, 5)
-    #     appliances.turn_off
-
-    #     expect(appliances.status).to eq(STATUS_OFF)
-    #   end
-    # end
+        expect(appliances.was_moving?).to be_truthy
+      end
+    end
     
-    # describe "#status" do
-    #   it "should show the status" do
-    #     appliances = HotelAutomation::Appliances.new(STATUS_ON, 5)
+    describe "#unmove" do
+      it "should set the move to false" do
+        appliances = HotelAutomation::Corridor.new
+        appliances.unmove
 
-    #     expect(appliances.status).to eq(STATUS_ON)
-    #   end
-    # end
+        expect(appliances.was_moving?).to be_falsey
+      end
+    end
     
-    # describe "#power_consumption" do
-    #   context "when status is on" do
-    #     it "should show the power consumption" do
-    #       appliances = HotelAutomation::Appliances.new(STATUS_ON, 5)
+    describe "#was_moving?" do
+        it "should show show motion status to true" do
+          appliances = HotelAutomation::Corridor.new
+          appliances.move
   
-    #       expect(appliances.power_consumption).to eq(5)
-    #     end
-    #   end
+          expect(appliances.was_moving?).to be_truthy
+        end
 
-    #   context "when status is off" do
-    #     it "should show the power consumption as 0" do
-    #       appliances = HotelAutomation::Appliances.new(STATUS_OFF, 5)
+      context "when not moving" do
+        it "should show motion status as false" do
+          appliances = HotelAutomation::Corridor.new
+          appliances.unmove
   
-    #       expect(appliances.power_consumption).to eq(0)
-    #     end
-    #   end
-    # end
+          expect(appliances.was_moving?).to be_falsey
+        end
+      end
+    end
   end
 end

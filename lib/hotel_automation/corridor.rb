@@ -4,9 +4,7 @@ module HotelAutomation
     attr_accessor :air_conditioners
   
     def initialize
-      @air_conditioners = @lights = []
-      # @lights = [Appliances.new(STATUS_OFF, DEFAULT_UNITS_LIGHTS)]
-      # @air_conditioners = [Appliances.new(STATUS_OFF, DEFAULT_UNITS_AC)]
+      @air_conditioners, @lights = [], []
       @lights << Appliances.new(STATUS_OFF, DEFAULT_UNITS_LIGHTS)
       @air_conditioners << Appliances.new(STATUS_OFF, DEFAULT_UNITS_AC)
       @movement = false

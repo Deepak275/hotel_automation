@@ -5,5 +5,4 @@ require "hotel_automation/corridor"
 
 module HotelAutomation
   class Error < StandardError; end
-  # Your code goes here...
 end
