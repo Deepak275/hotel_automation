@@ -1,0 +1,6 @@
+module HotelAutomation
+  STATUS_OFF = 'OFF'
+  STATUS_ON = 'ON'
+  DEFAULT_UNITS_LIGHTS = 5
+  DEFAULT_UNITS_AC = 10
+end
