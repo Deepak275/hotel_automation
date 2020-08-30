@@ -13,10 +13,10 @@ module HotelAutomation
     def current_status
       status = ''
       @lights.each_with_index do |light, i|
-        status << "  Light #{i+1}: #{light.status}" + "\n"
+        status << "     Light #{i+1}: #{light.status}" + "\n"
       end
       @air_conditioners.each_with_index do |ac, i|
-        status << "   AC #{i+1}: #{ac.status}" + "\n"
+        status << "     AC #{i+1}: #{ac.status}" + "\n"
       end
       status
     end

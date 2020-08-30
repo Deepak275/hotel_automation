@@ -6,7 +6,7 @@ module HotelAutomation
 
       it "should return the current status of appliances of corridor" do
         appliances = HotelAutomation::Corridor.new
-        expected_output = "  Light 1: OFF\n   AC 1: OFF\n"
+        expected_output = "     Light 1: OFF\n     AC 1: OFF\n"
 
         expect(appliances.current_status).to eq(expected_output)
       end
