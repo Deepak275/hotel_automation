@@ -1,28 +1,79 @@
 # HotelAutomation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hotel_automation`. To experiment with that code, run `bin/console` for an interactive prompt.
+To automate the regulation of power consumption in hotel to save power
 
-TODO: Delete this and the text above, and describe your gem
+## Local Setup
 
-## Installation
+* Clone the repo in your working dir and cd hote_automation.
+* Run `bundle install` to install the dependcies gems.
 
-Add this line to your application's Gemfile:
+## RUN in your local
+* There are two ways you can run this in your local:
 
-```ruby
-gem 'hotel_automation'
+#### Command line input: 
+1. Run chmod a+x bin/hotel_automation
+2. ./bin/hotel_automation and supply the prompted inputs
+
+#### File input: 
+1. create a file in the gem directory `input.txt` with the given below format
+
+```
+1
+1
+1
+STATUS
+MOTION 1 1
+STATUS
+NOMOTION 1 1
+STATUS
 ```
 
-And then execute:
+2. First three lines setup the hotel, indicating floors, main corridors and sub corridors.
+3. Next line you can provide any  command  `MOTION, STATUS, EXIT, NOMOTION`
+4. You will get output somthing like:
+```
+Building hotel with floor: 1, main_corridor_per_floor: 1, sub_corridor_per_floor: 1
+Done!
 
-    $ bundle
+Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION
+firing command: STATUS
+Floor 1
+  Main Corridor 1
+     Light 1: ON
+     AC 1: ON
+  Sub Corridor 1
+     Light 1: OFF
+     AC 1: ON
+  Max permissible for this floor: 25
+  Current Power consumption: 25
 
-Or install it yourself as:
 
-    $ gem install hotel_automation
+Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION
+firing command: MOTION
 
-## Usage
 
-TODO: Write usage instructions here
+Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION
+firing command: STATUS
+Floor 1
+  Main Corridor 1
+     Light 1: ON
+     AC 1: ON
+  Sub Corridor 1
+     Light 1: ON
+     AC 1: OFF
+  Max permissible for this floor: 25
+  Current Power consumption: 20
+```
+
+
+## Run specs:
+* Run command `rspec` in your gem directory.
+
+
+## Architecture
+
+`Controller` -->   `Hotel` --> `Floor` --> `Corridor`--> `Appliances`
+
 
 ## Development
 
