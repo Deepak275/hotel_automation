@@ -33,14 +33,11 @@ module HotelAutomation
 
     def check_and_reset_power
       return if power_consumption == max_power
-      p 'not coming'
       if power_consumption < max_power
         @sub_corridors.each do |sc|
           sc.air_conditioners.each {|ac| ac.turn_on}
         end
       else
-        p "in the nest"
-        p "sfsddjsk"
         catch (:done) do
           @sub_corridors.each do |sc|
             sc.air_conditioners.each do |ac|
