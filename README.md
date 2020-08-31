@@ -5,7 +5,7 @@ To automate the regulation of power consumption in hotel to save power
 ## Local Setup
 
 * Clone the repo in your working dir and cd hote_automation.
-* Run `bundle install` to install the dependcies gems.
+* Run `bundle install` to install the dependency gems.
 
 ## RUN in your local
 * There are two ways you can run this in your local:

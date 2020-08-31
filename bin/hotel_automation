@@ -11,37 +11,5 @@ require "hotel_automation"
 # require "pry"
 # Pry.start
 
-# if ARGV
-# p if ARGV.nil?
-
-# input_file = ARGV.first if ARGV.any?
-
-# if ARGV.empty?
-#   print "Enter the number of Floors: "
-#   floors = gets.chomp
-#   print "Enter the number of Main Corridors: "
-#   mc_per_floor = gets.chomp
-#   print "Enter the number of Sub Corridors: "
-#   sc_per_floor = gets.chomp
-
-#   controller = HotelAutomation::Controller.new(floors.to_i, mc_per_floor.to_i, sc_per_floor.to_i)
-#   controller.input
-# end
-
 controller = HotelAutomation::Controller.new
 controller.user_actions
-
-
-
-
-# print "Enter the number of Floors: "
-# floors = gets.chomp
-# print "Enter the number of Main Corridors: "
-# mc_per_floor = gets.chomp
-# print "Enter the number of Sub Corridors: "
-# sc_per_floor = gets.chomp
-
-# controller = HotelAutomation::Controller.new(floors.to_i, mc_per_floor.to_i, sc_per_floor.to_i)
-# controller.user_actions
-
-
