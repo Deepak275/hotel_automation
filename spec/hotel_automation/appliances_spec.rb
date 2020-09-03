@@ -13,7 +13,6 @@ module HotelAutomation
     end
     
     describe "#turn_off" do
-
       it "should set the status to off" do
         appliances = HotelAutomation::Appliances.new(STATUS_ON, 5)
         appliances.turn_off

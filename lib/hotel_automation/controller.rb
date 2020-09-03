@@ -43,30 +43,35 @@ module HotelAutomation
     def build_hotel(num_floors, num_of_mc, num_of_sc)
       @hotel = Hotel.new(num_floors.to_i, num_of_mc.to_i, num_of_sc.to_i, self)
     end
-
+    
     def cmdline_input_actions
       loop do
         puts 'Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION'
+        
         command = gets.chomp.downcase
-        if command.empty? || command == 'status' || command == 's'
-          puts hotel.current_status
-        elsif command == 'exit' || command == 'q!' || command == 'e'
-          puts 'Thank you!!'
-          break
-        elsif command == 'motion' || command == 'm'
+
+        case command
+        when 'motion', 'm'
           print 'Enter floor number: '
           floor = gets.chomp.to_i
           print 'Enter Sub Corridor number: '
           sub_corridor = gets.chomp.to_i
           changed
           notify_observers(floor, sub_corridor, true)
-        elsif command == 'nomotion' || command == 'n'
+        when 'nomotion', 'n'
           print 'Enter floor number: '
           floor = gets.chomp.to_i
           print 'Enter Sub Corridor number: '
           sub_corridor = gets.chomp.to_i
           changed
           notify_observers(floor, sub_corridor, false)
+        when 'status', 's', ''
+          puts hotel.current_status
+        when 'exit', 'q!', 'e'
+          puts 'Thank you!!'
+          break
+        else
+          puts "Invalid Input! Please provid valid input."
         end
       end
     end
@@ -86,21 +91,25 @@ module HotelAutomation
           command = next_input_line
         end
 
-        puts "\n"
-        puts 'Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION'
+        puts "\nEnter any of the commands: MOTION, STATUS, EXIT, NOMOTION"
         puts "firing command: #{command}"
+        
         command.downcase!
-        if command.empty? || command == 'status' || command == 's'
-          puts hotel.current_status
-        elsif command == 'exit' || command == 'q!' || command == 'e'
-          puts 'Thank you!!'
-          break
-        elsif command == 'motion' || command == 'm'
+
+        case command
+        when 'motion', 'm'
           changed
           notify_observers(floor, sub_corridor, true)
-        elsif command == 'nomotion' || command == 'n'
+        when 'nomotion', 'n'
           changed
           notify_observers(floor, sub_corridor, false)
+        when 'status', 's', ''
+          puts hotel.current_status
+        when 'exit', 'q!', 'e'
+          puts 'Thank you!!'
+          break
+        else
+          puts "Invalid Input! Please provid valid input."
         end
         puts "\n"
       end

@@ -3,7 +3,6 @@ require 'spec_helper'
 module HotelAutomation
   RSpec.describe Corridor do
     describe "#current_status" do
-
       it "should return the current status of appliances of corridor" do
         appliances = HotelAutomation::Corridor.new
         expected_output = "     Light 1: OFF\n     AC 1: OFF\n"
