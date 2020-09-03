@@ -2,10 +2,9 @@ module HotelAutomation
   class Hotel
     attr_accessor :floors
   
-    def initialize(num_floors, num_of_mc, num_of_sc, controller)
+    def initialize(num_floors, num_of_mc, num_of_sc)
       @floors = []
       num_floors.times{ @floors << Floor.new(num_of_mc, num_of_sc) }
-      controller.add_observer(self)
     end
   
     def current_status

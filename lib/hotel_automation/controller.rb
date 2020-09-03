@@ -10,6 +10,7 @@ module HotelAutomation
 
     def initialize
       ARGV.empty? ? hotel_cmdline_input : hotel_file_input(ARGV.first)
+      add_listner
     end
 
     def user_actions
@@ -41,9 +42,13 @@ module HotelAutomation
     end
 
     def build_hotel(num_floors, num_of_mc, num_of_sc)
-      @hotel = Hotel.new(num_floors.to_i, num_of_mc.to_i, num_of_sc.to_i, self)
+      @hotel = Hotel.new(num_floors.to_i, num_of_mc.to_i, num_of_sc.to_i)
     end
     
+    def add_listner
+      self.add_observer(@hotel)
+    end
+
     def cmdline_input_actions
       loop do
         puts 'Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION'
