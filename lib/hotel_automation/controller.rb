@@ -9,17 +9,17 @@ module HotelAutomation
     MOVEMENT_ACTIONS = ["MOTION", "NOMOTION"]
 
     def initialize
-      ARGV.empty? ? hotel_cmdline_input : hotel_file_input(ARGV.first)
+      ARGV.empty? ? cli_hotel : file_input_hotel(ARGV.first)
       add_listner
     end
 
     def user_actions
-      ARGV.empty? ? cmdline_input_actions : file_input_actions(ARGV.first)
+      ARGV.empty? ? cli_actions : file_input_actions(ARGV.first)
     end
 
     private
 
-    def hotel_cmdline_input
+    def cli_hotel
       print "Enter the number of Floors: "
       floors = gets.chomp
       print "Enter the number of Main Corridors: "
@@ -30,7 +30,7 @@ module HotelAutomation
       build_hotel(floors, mc_per_floor, sc_per_floor) 
     end
     
-    def hotel_file_input(input_file)
+    def file_input_hotel(input_file)
       input_content = File.read(input_file).split("\n")
       floors = input_content.first
       mc_per_floor = input_content[1]
@@ -38,7 +38,7 @@ module HotelAutomation
 
       puts "Building hotel with floor: #{floors}, main_corridor_per_floor: #{mc_per_floor}, sub_corridor_per_floor: #{sc_per_floor}"
       build_hotel(floors, mc_per_floor, sc_per_floor)
-      puts "Done!"
+      puts "Hotel created!"
     end
 
     def build_hotel(num_floors, num_of_mc, num_of_sc)
@@ -49,7 +49,7 @@ module HotelAutomation
       self.add_observer(@hotel)
     end
 
-    def cmdline_input_actions
+    def cli_actions
       loop do
         puts 'Enter any of the commands: MOTION, STATUS, EXIT, NOMOTION'
         
@@ -82,32 +82,26 @@ module HotelAutomation
     end
 
     def file_input_actions(input_file)
-      action_content = File.read(input_file).split("\n").drop(3)
+      #read the input file and remove hotel build inputs 
+      file_content = File.read(input_file).split("\n").drop(3)
 
-      for next_input_line in action_content
-
+      for next_input_line in file_content
         action_array = next_input_line.split(' ')
-        if MOVEMENT_ACTIONS.include? (action_array.first)
-          movement_input = next_input_line.split(' ')
-          floor = movement_input[1].to_i
-          sub_corridor = movement_input[2].to_i
-          command = movement_input.first
-        elsif
-          command = next_input_line
-        end
+
+        command = action_array.length <= 1 ? action_array.first : get_input_command(action_array)
 
         puts "\nEnter any of the commands: MOTION, STATUS, EXIT, NOMOTION"
-        puts "firing command: #{command}"
+        puts "Firing command: #{command}\n\n"
         
         command.downcase!
 
         case command
         when 'motion', 'm'
           changed
-          notify_observers(floor, sub_corridor, true)
+          notify_observers(@floor, @sub_corridor, true)
         when 'nomotion', 'n'
           changed
-          notify_observers(floor, sub_corridor, false)
+          notify_observers(@floor, @sub_corridor, false)
         when 'status', 's', ''
           puts hotel.current_status
         when 'exit', 'q!', 'e'
@@ -117,6 +111,15 @@ module HotelAutomation
           puts "Invalid Input! Please provid valid input."
         end
         puts "\n"
+      end
+    end
+
+    def get_input_command(action_array)
+
+      if MOVEMENT_ACTIONS.include? (action_array.first)
+        @floor = action_array[1].to_i
+        @sub_corridor = action_array[2].to_i
+        action_array.first
       end
     end
   end
