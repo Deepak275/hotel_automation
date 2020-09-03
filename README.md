@@ -30,7 +30,8 @@ STATUS
 
 2. First three lines setup the hotel, indicating floors, main corridors and sub corridors.
 3. Next line you can provide any  command  `MOTION, STATUS, EXIT, NOMOTION`
-4. You will get output somthing like:
+4. Run `./bin/hotel_automation <input-file-name>`, in our case `./bin/hotel_automation input.txt`
+5. You will get output somthing like:
 ```
 Building hotel with floor: 1, main_corridor_per_floor: 1, sub_corridor_per_floor: 1
 Done!
