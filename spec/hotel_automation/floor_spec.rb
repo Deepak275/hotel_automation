@@ -51,6 +51,5 @@ module HotelAutomation
         end
       end
     end
-    
-    # describe "#status" do
-    #  
+  end
+end
