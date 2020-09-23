@@ -10,21 +10,23 @@ module HotelAutomation
     end
 
     describe '#update' do
-      context "when floor is invalid" do
-        it 'should return nil and does not change the state' do
-          initial_status = hotel.current_status
-          
-          expect(hotel.update(2, 1, false)).to be_nil
-          expect(hotel.current_status).to eq(initial_status)
+      context 'invalid inputs' do
+        context "when floor is invalid" do
+          it 'should return nil and does not change the state' do
+            initial_status = hotel.current_status
+            
+            expect(hotel.update(2, 1, false)).to be_nil
+            expect(hotel.current_status).to eq(initial_status)
+          end
         end
-      end
-      
-      context "when corridor is invalid" do
-        it 'should return nil and does not change the state' do
-          initial_status = hotel.current_status
-          
-          expect(hotel.update(1, 2, false)).to be_nil
-          expect(hotel.current_status).to eq(initial_status)
+        
+        context "when corridor is invalid" do
+          it 'should return nil and does not change the state' do
+            initial_status = hotel.current_status
+            
+            expect(hotel.update(1, 2, false)).to be_nil
+            expect(hotel.current_status).to eq(initial_status)
+          end
         end
       end
       
@@ -33,7 +35,6 @@ module HotelAutomation
         
         it 'should reset the power consumption accordingly' do
           hotel.update(1, 1, true)
-          hotel.current_status
           expect(hotel.current_status).to eq(expected_output)
         end
       end

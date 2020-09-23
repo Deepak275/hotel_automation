@@ -5,13 +5,15 @@ module HotelAutomation
     def initialize(num_floors, num_of_mc, num_of_sc)
       @floors = []
       num_floors.times{ @floors << Floor.new(num_of_mc, num_of_sc) }
+      @power = Power.new(@floors)
+      @power.check_and_reset_hotel_consumption
     end
   
     def current_status
       status = ''
       @floors.each_with_index do |floor, i|
         status << "Floor #{i+1}" + "\n"
-        status << floor.current_status
+        status << @power.floor_current_status(floor)
       end
       status
     end
@@ -35,8 +37,8 @@ module HotelAutomation
         sc.unmove
         sc.lights.each {|light| light.turn_off}
       end
-
-      current_floor.check_and_reset_power
+      
+      @power.check_and_reset_hotel_consumption
     end
   end
 end
