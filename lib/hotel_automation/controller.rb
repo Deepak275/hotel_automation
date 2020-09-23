@@ -57,19 +57,11 @@ module HotelAutomation
 
         case command
         when 'motion', 'm'
-          print 'Enter floor number: '
-          floor = gets.chomp.to_i
-          print 'Enter Sub Corridor number: '
-          sub_corridor = gets.chomp.to_i
-          changed
-          notify_observers(floor, sub_corridor, true)
+          get_motion_input
+          notify_changes(true)
         when 'nomotion', 'n'
-          print 'Enter floor number: '
-          floor = gets.chomp.to_i
-          print 'Enter Sub Corridor number: '
-          sub_corridor = gets.chomp.to_i
-          changed
-          notify_observers(floor, sub_corridor, false)
+          get_motion_input
+          notify_changes(false)
         when 'status', 's', ''
           puts hotel.current_status
         when 'exit', 'q!', 'e'
@@ -97,7 +89,6 @@ module HotelAutomation
 
         case command
         when 'motion', 'm'
-          changed
           notify_observers(@floor, @sub_corridor, true)
         when 'nomotion', 'n'
           changed
@@ -121,6 +112,20 @@ module HotelAutomation
         @sub_corridor = action_array[2].to_i
         action_array.first
       end
+    end
+
+    private
+
+    def get_motion_input
+      print 'Enter floor number: '
+      @floor = gets.chomp.to_i
+      print 'Enter Sub Corridor number: '
+      @sub_corridor = gets.chomp.to_i
+    end
+
+    def notify_changes(movement)
+      changed
+      notify_observers(@floor, @sub_corridor, movement)
     end
   end
 end
